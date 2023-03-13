@@ -1,10 +1,15 @@
 from flask import Flask
 from datetime import datetime
-import sys
 
 app = Flask(__name__)
 
-weekdays_list: list = ['Понедельника', 'Вторника', 'Среды', 'Четверга', 'Пятницы', 'Субботы', 'Воскресенья']
+weekdays_dict: dict = {0: 'Понедельника',
+                       1: 'Вторника',
+                       2: 'Среды',
+                       3: 'Четверга',
+                       4: 'Пятницы',
+                       5: 'Субботы',
+                       6: 'Воскресенья'}
 
 
 @app.route('/hello_world/<username>')
@@ -18,9 +23,9 @@ def hello(username: str) -> str:
     weekday = datetime.today().weekday()
 
     if weekday in (0, 1, 3, 6):
-        return f'{hello_name} Хорошего {weekdays_list[weekday]}!'
+        return f'{hello_name} Хорошего {weekdays_dict[weekday]}!'
 
-    return f'{hello_name} Хорошей {weekdays_list[weekday]}!'
+    return f'{hello_name} Хорошей {weekdays_dict[weekday]}!'
 
 
 if __name__ == '__main__':
